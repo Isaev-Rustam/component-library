@@ -1,10 +1,20 @@
-import React from 'react';
+// src/App.tsx
+import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { Button } from './components/Button';
+import { darkTheme, lightTheme } from './themes';
 
 const App: React.FC = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const toggleTheme = () =>
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+
   return (
-    <div>
-      <h1>Hello, React with </h1>
-    </div>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <Button onClick={toggleTheme}>{theme}</Button>
+      <div id="portal-root" />
+    </ThemeProvider>
   );
 };
 
