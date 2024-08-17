@@ -1,73 +1,64 @@
-// Импортируем встроенный модуль `path`, который помогает работать с путями файлов и директорий.
 const path = require('path');
-
-// Импортируем плагин `HtmlWebpackPlugin`, который автоматически создает HTML файл,
-// подключает в него сгенерированные Webpack-ом скрипты.
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  // Режим сборки: 'development' означает, что Webpack будет собирать код оптимизированным для разработки (например, с включенными source maps).
-  mode: 'development',
-
-  // Точка входа для приложения — основной файл, с которого начинается сборка.
-  entry: './src/index.tsx',
-
-  // Опции для выходных файлов после сборки.
+  mode: 'development', // Режим сборки: 'development' для режима разработки, 'production' для продакшн-сборки
+  entry: {
+    app: './src/index.tsx', // Основная точка входа приложения
+    vendor: ['styled-components'], // Добавляем styled-components в отдельный чанк
+  },
   output: {
-    // `path` — путь к директории, куда будут сохраняться собранные файлы (в данном случае папка `dist`).
-    path: path.resolve(__dirname, 'dist'),
-    // `filename` — имя выходного файла JavaScript, в который Webpack соберет все модули.
-    filename: 'bundle.js',
-    // `clean` — очищает выходную директорию перед каждой новой сборкой, чтобы удалить старые файлы.
-    clean: true,
+    path: path.resolve(__dirname, 'dist'), // Директория, куда будет сохранён итоговый бандл
+    filename: '[name].bundle.js', // Шаблон для имени файла
+    clean: true, // Очищать директорию dist перед сборкой
   },
-
-  // Опции разрешения модулей. Здесь указываются расширения файлов, которые Webpack будет обрабатывать.
+  externals: {
+    'styled-components': {
+      //предотвращает дублирование styled-components при сборке нескольких приложений на одной странице.
+      commonjs: 'styled-components', // Объявляет styled-components как внешнюю зависимость для CommonJS
+      commonjs2: 'styled-components', // Объявляет styled-components как внешнюю зависимость для CommonJS2
+      amd: 'styled-components', // Объявляет styled-components как внешнюю зависимость для AMD
+      root: 'styled', // Объявляет styled-components как внешнюю зависимость для глобального объекта (для браузеров)
+    },
+  },
   resolve: {
-    // `.ts`, `.tsx`, `.js` — файлы с этими расширениями будут автоматически подхватываться Webpack-ом без необходимости явно указывать их расширение в импортах.
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js'], // Расширения файлов, которые Webpack должен обрабатывать
+    alias: {
+      'styled-components': path.resolve(
+        __dirname,
+        'node_modules',
+        'styled-components'
+      ), // Создание alias для styled-components
+    },
   },
-
-  // Модульные правила для обработки файлов различных типов (например, TypeScript или CSS).
   module: {
     rules: [
       {
-        // `test` указывает на типы файлов, которые это правило будет обрабатывать (здесь — файлы с расширениями `.ts` и `.tsx`).
-        test: /\.tsx?$/,
-        // `use` указывает, какой загрузчик использовать для этих файлов — в данном случае `ts-loader` для обработки TypeScript файлов.
-        use: 'ts-loader',
-        // `exclude` — исключаем директорию `node_modules`, чтобы не обрабатывать зависимости проекта.
-        exclude: /node_modules/,
+        test: /\.tsx?$/, // Правила для обработки файлов TypeScript и TSX
+        use: 'ts-loader', // Использование ts-loader для компиляции TypeScript
+        exclude: /node_modules/, // Исключение node_modules из обработки
       },
       {
-        // `test` указывает на типы файлов, которые это правило будет обрабатывать (здесь — файлы с расширением `.css`).
-        test: /\.css$/,
-        // `use` — массив загрузчиков, которые будут применяться к этим файлам. `style-loader` — вставляет CSS в DOM, `css-loader` — позволяет импортировать CSS в JavaScript.
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/, // Правила для обработки CSS файлов
+        use: ['style-loader', 'css-loader'], // Использование style-loader и css-loader для обработки CSS
       },
     ],
   },
-
-  // Секция плагинов. Здесь подключаем плагины, которые расширяют функциональность Webpack.
   plugins: [
-    // `HtmlWebpackPlugin` создаст HTML файл, который будет содержать ссылку на сгенерированный `bundle.js`.
     new HtmlWebpackPlugin({
-      // `template` указывает на исходный HTML файл-шаблон, который будет использован для генерации итогового HTML.
-      template: './public/index.html',
+      template: './public/index.html', // Шаблон HTML для генерации финального HTML-файла
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor', // Имя чанка для внешних библиотек
+      minChunks: Infinity, // Количество раз, когда модуль должен быть использован, чтобы попасть в этот чанк
     }),
   ],
-
-  // Опции для встроенного в Webpack сервера разработки.
   devServer: {
-    // `static` указывает на директорию, из которой будет обслуживаться статический контент.
-    static: path.join(__dirname, 'dist'),
-    // `compress` включает сжатие файлов, отправляемых сервером, для более быстрого их передачи.
-    compress: true,
-    // `port` — порт, на котором будет работать сервер разработки (по умолчанию это будет `http://localhost:9000`).
-    port: 9000,
-    // `hot` включает "горячую" замену модулей (HMR), которая позволяет обновлять модули на странице без перезагрузки.
-    hot: true,
-    // `open` автоматически открывает браузер при запуске сервера.
-    open: true,
+    static: path.join(__dirname, 'dist'), // Директория для статических файлов
+    compress: true, // Включение сжатия
+    port: 9000, // Порт для сервера разработки
+    hot: true, // Включение горячей перезагрузки модулей
+    open: true, // Открывать браузер при запуске
   },
 };
