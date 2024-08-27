@@ -1,3 +1,4 @@
+// buildLoaders.ts
 import { ModuleOptions } from 'webpack';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
 import { BuildOptions } from './types/types';
@@ -6,30 +7,11 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
   const isDev = options.mode === 'development';
 
   const assetLoader = {
-    test: /\.(png|jpg|jpeg|gif)$/i,
+    test: /\.(png|jpg|jpeg|gif|svg)$/i,
     type: 'asset/resource',
-  };
-
-  const svgrLoader = {
-    test: /\.svg$/i,
-    use: [
-      {
-        loader: '@svgr/webpack',
-        options: {
-          icon: true,
-          svgoConfig: {
-            plugins: [
-              {
-                name: 'convertColors',
-                params: {
-                  currentColor: true,
-                },
-              },
-            ],
-          },
-        },
-      },
-    ],
+    generator: {
+      filename: 'images/[hash][ext][query]',
+    },
   };
 
   const tsLoader = {
@@ -48,5 +30,5 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     ],
   };
 
-  return [assetLoader, tsLoader, svgrLoader];
+  return [assetLoader, tsLoader];
 }

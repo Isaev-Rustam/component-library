@@ -1,11 +1,20 @@
 import path from 'path';
 import webpack from 'webpack';
+//
 import { buildWebpack } from './src/config/build/buildWebpack';
 import {
   BuildMode,
   BuildPaths,
   BuildPlatform,
 } from './src/config/build/types/types';
+//
+
+/* import {
+  BuildMode,
+  BuildPaths,
+  BuildPlatform,
+  buildWebpack,
+} from 'webpack-87654321'; */
 
 interface EnvVariables {
   mode?: BuildMode;

@@ -1,3 +1,4 @@
+// buildPlugins.ts
 import webpack, { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BuildOptions } from './types/types';

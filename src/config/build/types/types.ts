@@ -1,8 +1,9 @@
+// types.ts
 export interface BuildPaths {
   entry: string;
-  html: string;
-  public: string;
   output: string;
+  public: string;
+  html: string;
   src: string;
 }
 
