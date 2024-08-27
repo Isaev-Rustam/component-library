@@ -1,7 +1,7 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Button } from './components/Button';
+import Button from './components/Button';
 import { darkTheme, lightTheme } from './themes';
 
 const App: React.FC = () => {
@@ -12,7 +12,9 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <Button onClick={toggleTheme}>{theme}</Button>
+      <Button borderColor="disabled-color" borderRadius='extraLarge' onClick={toggleTheme}>
+        {theme}
+      </Button>
       <div id="portal-root" />
     </ThemeProvider>
   );

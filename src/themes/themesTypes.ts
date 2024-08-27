@@ -1,3 +1,17 @@
+// Интерфейс Theme определяет структуру темы
+export interface Theme {
+  colors: ThemeColors;
+  borderRadius: ThemeBorderRadius;
+  borderWidth: ThemeBorderWidth;
+}
+
+// Типы размеров
+type BorderRadiusType = 'small' | 'medium' | 'large' | 'extraLarge';
+type BorderWidthType = 'thin' | 'medium' | 'thick' | 'extraThick';
+
+//Единицы измерения
+export type RemUnits = `${number}rem`;
+
 // Интерфейс для цветов темы
 export interface ThemeColors {
   'primary-color': string; // Основной акцентный цвет (например, для кнопок и важных элементов)
@@ -16,34 +30,15 @@ export interface ThemeColors {
 }
 
 // Радиус
-export interface ThemeBorderRadius {
-  small: string;
-  medium: string;
-  large: string;
-  extraLarge: string;
-}
-
+export type ThemeBorderRadius = Record<BorderRadiusType, RemUnits>;
 // Ширина рамки
-export interface ThemeBorderWidth {
-  thin: string;
-  medium: string;
-  thick: string;
-  extraThick: string;
-}
+export type ThemeBorderWidth = Record<BorderWidthType, RemUnits>;
 
-// Интерфейс Theme определяет структуру темы, состоящую из объекта colors
-export interface Theme {
-  colors: ThemeColors;
-  borderRadius: ThemeBorderRadius;
-  borderWidth: ThemeBorderWidth;
-}
-
-// Тип ключей для рамок
+// Keys Object
 export type BorderRadiusKeys = keyof ThemeBorderRadius;
 export type BorderWidthKeys = keyof ThemeBorderWidth;
-export type BorderColorKeys = keyof Theme['colors'];
+export type ColorKeys = keyof ThemeColors;
 
-// Тип значений для рамок
+// Value Object
 export type BorderRadiusValues = ThemeBorderRadius[BorderRadiusKeys];
 export type BorderWidthValues = ThemeBorderWidth[BorderWidthKeys];
-export type BorderColorsValues = Theme['colors'][keyof Theme['colors']];

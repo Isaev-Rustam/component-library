@@ -1,23 +1,18 @@
 import styled from 'styled-components';
-import {
-  BorderColorKeys,
-  BorderRadiusKeys,
-  BorderWidthKeys,
-  Theme,
-} from '../../themes/themesTypes';
+import { BorderRadiusKeys, BorderWidthKeys, ColorKeys } from '../../themes';
 import { ReactNode } from 'react';
 
 // Интерфейс для пропсов кнопки
 export interface StyledButtonProps {
   size?: 'small' | 'medium' | 'large';
-  borderColor?: BorderColorKeys;
   borderRadius?: BorderRadiusKeys;
   borderWidth?: BorderWidthKeys;
-  backgroundColor?: keyof Theme['colors'];
-  textColor?: keyof Theme['colors'];
-  hoverColor?: keyof Theme['colors'];
-  activeColor?: keyof Theme['colors'];
-  disabledColor?: keyof Theme['colors'];
+  borderColor?: ColorKeys;
+  backgroundColor?: ColorKeys;
+  textColor?: ColorKeys;
+  hoverColor?: ColorKeys;
+  activeColor?: ColorKeys;
+  disabledColor?: ColorKeys;
   children?: ReactNode;
 }
 

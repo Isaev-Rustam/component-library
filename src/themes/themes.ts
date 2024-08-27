@@ -1,66 +1,70 @@
-import { Theme } from './themesTypes';
+import {
+  Theme,
+  ThemeBorderRadius,
+  ThemeBorderWidth,
+  ThemeColors,
+} from './themesTypes';
+
 // Радиус
-export const borderRadius = {
-  small: '4px', // Для мелких элементов, таких как кнопки
-  medium: '8px', // Для стандартных элементов, таких как карточки
-  large: '12px', // Для крупных элементов, таких как модальные окна
-  extraLarge: '16px', // Для очень крупных элементов, например, круглые аватары
+export const borderRadius: ThemeBorderRadius = {
+  small: '4rem',
+  medium: '8rem',
+  large: '1.25rem',
+  extraLarge: '16rem',
 };
 
-// Ширина рамки
-export const borderWidth = {
-  thin: '1px', // Для мелких элементов или деликатных границ
-  medium: '2px', // Для стандартных границ
-  thick: '4px', // Для крупных элементов, таких как акцентные границы
-  extraThick: '8px', // Для очень толстых границ, например, для акцентов или разделителей
+// Ширина
+export const borderWidth: ThemeBorderWidth = {
+  thin: '1rem',
+  medium: '2rem',
+  thick: '4rem',
+  extraThick: '8rem',
 };
 
-// Общие цвета для обеих тем
-export const commonColors = {
-  'border-header-divider': '#8b949e', // Светло-серая граница разделителя в шапке
-  'border-control': '#30363d', // Темно-серая граница контролов
-  'border-focus-outline': '#1f6feb', // Ярко-синий фокус
+// цвета для светлой темы
+export const lightThemeColors: ThemeColors = {
+  'primary-color': '#006edb',
+  'secondary-color': '#636c76',
+  'background-color': '#f6f8fa',
+  'surface-color': '#ffffff',
+  'text-color': '#1f2328',
+  'secondary-text-color': '#636c76',
+  'border-color': '#8b949e',
+  'hover-color': '#54aeff66',
+  'active-color': '#006edb',
+  'disabled-color': '#b0b3b8',
+  'error-color': '#b62324',
+  'success-color': '#238636',
+  'warning-color': '#fff8c5',
 };
 
-// Светлая тема
+// цвета для чёрной темы
+export const DarkThemeColors: ThemeColors = {
+  'primary-color': '#0576ff',
+  'secondary-color': '#8d96a0',
+  'background-color': '#0d1117',
+  'surface-color': '#0d1117',
+  'text-color': '#e6edf3',
+  'secondary-text-color': '#8d96a0',
+  'border-color': '#30363d',
+  'hover-color': '#1f6febb3',
+  'active-color': '#0576ff',
+  'disabled-color': '#495057',
+  'error-color': '#dc3545',
+  'success-color': '#238636',
+  'warning-color': '#d2992266',
+};
+
+//Theme light
 export const lightTheme: Theme = {
-  colors: {
-    'primary-color': '#006edb', // Ярко-синий для акцентов
-    'secondary-color': '#636c76', // Серый для вторичных элементов
-    'background-color': '#f6f8fa', // Светлый серый фон страницы
-    'surface-color': '#ffffff', // Белый фон для поверхностных элементов (карточки, модальные окна)
-    'text-color': '#1f2328', // Темный основной текст
-    'secondary-text-color': '#636c76', // Приглушенный текст
-    'border-color': '#8b949e', // Цвет границ для разделения различных элементов
-    'hover-color': '#54aeff66', // Светло-синий цвет при наведении на элементы
-    'active-color': '#006edb', // Ярко-синий для активных элементов
-    'disabled-color': '#b0b3b8', // Более заметный серый для отключенных элементов
-    'error-color': '#b62324', // Красный для сообщений об ошибках
-    'success-color': '#238636', // Зеленый для успешных действий
-    'warning-color': '#fff8c5', // Светло-желтый для предупреждений
-  },
-  borderRadius: borderRadius, // Добавление объекта borderRadius
-  borderWidth: borderWidth, // Добавление объекта borderWidth
+  colors: lightThemeColors,
+  borderRadius,
+  borderWidth,
 };
 
-// Темная тема
+//Theme dark
 export const darkTheme: Theme = {
-  colors: {
-    'primary-color': '#0576ff', // Ярко-синий для акцентов
-    'secondary-color': '#8d96a0', // Светло-серый приглушенный текст и элементы
-    'background-color': '#0d1117', // Темный серый фон страницы
-    'surface-color': '#0d1117', // Темный фон для поверхностных элементов (карточки, модальные окна)
-    'text-color': '#e6edf3', // Светлый основной текст
-    'secondary-text-color': '#8d96a0', // Приглушенный текст
-    'border-color': '#30363d', // Цвет границ для разделения различных элементов
-    'hover-color': '#1f6febb3', // Темно-синий цвет при наведении на элементы
-    'active-color': '#0576ff', // Ярко-синий для активных элементов
-    'disabled-color': '#495057', // Темно-серый для отключенных элементов
-    'error-color': '#dc3545', // Красный для сообщений об ошибках
-    'success-color': '#238636', // Зеленый для успешных действий
-    'warning-color': '#d2992266', // Темно-желтый для предупреждений
-  },
-  borderRadius: borderRadius, // Добавление объекта borderRadius
-  borderWidth: borderWidth, // Добавление объекта borderWidth
+  colors: DarkThemeColors,
+  borderRadius,
+  borderWidth,
 };
-

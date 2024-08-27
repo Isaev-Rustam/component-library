@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { StyledButton, StyledButtonProps } from './Button.styles';
+import React from 'react';
 
 interface ButtonProps extends StyledButtonProps {
   onClick?: () => void;
