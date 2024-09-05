@@ -1,11 +1,14 @@
 // src/App.tsx
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import Button from '@/components/Button';
 import { darkTheme, lightTheme } from './themes';
 import image from '@/assets/Ts.jpg';
 import Logo from '@/assets/logo.svg';
-// import {  } from '87654321';
+import Button from './components/Button';
+
+// import { capitalize } from '87654321';
+
+// console.log(capitalize(''));
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');

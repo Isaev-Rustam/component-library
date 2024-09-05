@@ -1,23 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "ESNext",
-    "target": "es5",
     "jsx": "react-jsx",
-    "allowJs": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "skipLibCheck": true,
+    "target": "es5", // Поддержка старых браузеров
+    "module": "commonjs", // Модули CommonJS для Node.js
+    "declaration": true, // Генерация файлов типов
+    "outDir": "./dist", // Директория вывода
+    "strict": true, // Строгий режим проверки
+    "esModuleInterop": true // Совместимость с ES6 модулями
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": ["src/**/*"], // Включение всех файлов в папке src
+  "exclude": ["node_modules"] // Исключение node_modules
 }

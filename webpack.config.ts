@@ -1,20 +1,7 @@
+// webpack.config.ts
 import path from 'path';
-import webpack from 'webpack';
-//
-import { buildWebpack } from './src/config/build/buildWebpack';
-import {
-  BuildMode,
-  BuildPaths,
-  BuildPlatform,
-} from './src/config/build/types/types';
-//
 
-/* import {
-  BuildMode,
-  BuildPaths,
-  BuildPlatform,
-  buildWebpack,
-} from 'webpack-87654321'; */
+import { BuildMode, BuildPaths, BuildPlatform, buildWebpack } from '87654321';
 
 interface EnvVariables {
   mode?: BuildMode;
@@ -32,7 +19,8 @@ export default (env: EnvVariables) => {
     src: path.resolve(__dirname, 'src'),
   };
 
-  const config: webpack.Configuration = buildWebpack({
+  // const config: webpack.Configuration = buildWebpack({
+  const config = buildWebpack({
     port: env.port ?? 3000,
     mode: env.mode ?? 'development',
     paths,
