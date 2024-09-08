@@ -1,7 +1,12 @@
 // webpack.config.ts
 import path from 'path';
 
-import { BuildMode, BuildPaths, BuildPlatform, buildWebpack } from '87654321';
+import {
+  BuildMode,
+  BuildPaths,
+  BuildPlatform,
+  buildWebpack,
+} from 'setup-webpack-builder';
 
 interface EnvVariables {
   mode?: BuildMode;
@@ -19,7 +24,6 @@ export default (env: EnvVariables) => {
     src: path.resolve(__dirname, 'src'),
   };
 
-  // const config: webpack.Configuration = buildWebpack({
   const config = buildWebpack({
     port: env.port ?? 3000,
     mode: env.mode ?? 'development',

@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "skipLibCheck": true,
+    "jsx": "react-jsx", //JSX для создания React компонентов
+    "skipLibCheck": true, // Пропуск проверки типов в библиотеках, что ускоряет компиляцию
     "target": "es5", // Поддержка старых браузеров
     "module": "commonjs", // Модули CommonJS для Node.js
     "declaration": true, // Генерация файлов типов
-    "outDir": "./dist", // Директория вывода
+    "outDir": "./dist", // Директория вывода скомпилированных файлов
     "strict": true, // Строгий режим проверки
-    "esModuleInterop": true // Совместимость с ES6 модулями
+    "esModuleInterop": true // Совместимость с ES6 модулями для работы с импортом/экспортом
   },
-  "include": ["src/**/*"], // Включение всех файлов в папке src
-  "exclude": ["node_modules"] // Исключение node_modules
+  "include": ["src/**/*"], // Включение всех файлов в папке src для компиляции
+  "exclude": ["node_modules"] // Исключение node_modules для ускорения компиляции и избежания конфликтов
 }
